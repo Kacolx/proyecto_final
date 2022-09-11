@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block head_title %}
+{{ super() }}: crear movimiento
+{% endblock %}
+
+
+{% block page_title %}
+Agregar movimiento
+{% endblock %}
+
+
+{% block contenido %}
+{{super()}}
+
+<!--
+  CRUD: Create, Read, Update, Delete
+  GET: read
+  POST: create, delete
+  PUT: update
+ -->
+<form action="/nuevo" method="post">
+
+  <div class="campo-formulario">
+    <label for="fecha">Fecha</label>
+    <input type="date" id="fecha" name="fecha">
+  </div>
+
+  <div class="campo-formulario">
+    <label for="hora">Hora</label>
+    <input type="time" id="hora" name="hora">
+  </div>
+
+  <div class="campo-formulario">
+    <label for="concepto">Concepto</label>
+    <input type="text" id="concepto" name="concepto" required>
+  </div>
+
+  <div class="campo-formulario">
+    <input type="radio" name="tipo" id="ingreso" value="I">
+    <label for="ingreso" class="radio-label">Ingreso</label>
+    <input type="radio" name="tipo" id="gasto" value="G" checked>
+    <label for="gasto" class="radio-label">Gasto</label>
+  </div>
+
+  <div class="campo-formulario">
+    <label for="cantidad">Cantidad</label>
+    <input type="number" id="cantidad" name="cantidad" required>
+  </div>
+
+  <div class="acciones">
+    <!-- <input type="submit" value="Agregar"> -->
+    <button type="submit" class="blue-button">Agregar</button>
+  </div>
+
+</form>
+{% endblock %}

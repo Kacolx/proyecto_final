@@ -1,9 +1,15 @@
+from flask import render_template
 from . import app
+from .models import DBManager
+
+RUTA = 'data/crypto.db'
 
 
 @app.route("/")
 def inicio():
-    return "pagina de inicio"
+    db = DBManager(RUTA)
+    cambios = db.consultaSQL("SELECT * FROM crypto")
+    return render_template("inicio.html", movs=cambios)
 
 
 @app.route("/purchase", methods=["GET", "POST"])

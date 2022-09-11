@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block head_title %}
+{{ super() }}: inicio
+{% endblock %}
+
+{% block page_title %}
+Listado de cambios
+{% endblock %}
+
+{% block contenido %}
+{{ super() }}
+<table class="paper">
+  <tr>
+    <th class="titulo-tabla">Fecha</th>
+    <th class="titulo-tabla">Hora</th>
+    <th class="titulo-tabla moneda">Moneda from</th>
+    <th class="titulo-tabla numero">Cantidad from</th>
+    <th class="titulo-tabla moneda">Moneda to</th>
+    <th class="titulo-tabla numero">Cantidad to</th>
+  </tr>
+  {% if movs %}
+  {% for mov in movs %}
+  <tr>
+    <td>
+      {% if mov.fecha %}
+      {{ mov.fecha }}
+      {% else %}
+      ---
+      {% endif %}
+    </td>
+    <td>{{ mov.hora }}</td>
+    <td class="moneda">{{ mov.moneda_from }}</td>
+    <td class="numero">{{ mov.cantidad_from }}</td>
+    <td class="moneda">{{ mov.moneda_to }}</td>
+    <td class="numero">{{ mov.cantidad_to }}</td>
+  </tr>
+  {% if mov.errores %}
+  <tr>
+    <td colspan="4" class="error">
+      {% for error in mov.errores %}
+      {{ error }}.
+      {% endfor %}
+    </td>
+  </tr>
+  {% endif %}
+  {% endfor %}
+  {% else %}
+  <tr>
+    <td colspan="4" class="lista-vacia">No hay cambios que mostrar que mostrar</td>
+  </tr>
+  {% endif %}
+</table>
+{% endblock %}

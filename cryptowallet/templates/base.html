@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block head_title %}Balance App{% endblock %}</title>
+  <link rel="stylesheet" href="static/css/flat-remix.css">
+  <link rel="stylesheet" href="static/css/styles.css">
+</head>
+
+<body>
+
+  {% include 'components/header.html' %}
+  {% include 'components/navbar.html' %}
+
+  <main>
+    {% block contenido %}
+    <h1>{% block page_title %}{% endblock %}</h1>
+    {% endblock %}
+  </main>
+
+  {% include 'components/footer.html' %}
+
+</body>
+
+</html>
