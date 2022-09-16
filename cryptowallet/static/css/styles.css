@@ -25,9 +25,10 @@ main {
   padding: 0 20px;
 }
 
-table.paper {
+table.paper div.paper {
   width: 100%;
 }
+
 
 .titulo-tabla {
   border-bottom: #19a187 1px solid;
@@ -40,6 +41,7 @@ table.paper {
 
 .moneda {
   text-align: center;
+  display: block;
 }
 
 table.paper .error {
@@ -63,11 +65,12 @@ table.paper .error {
 /* Estilos del formulario */
 
 .campo-formulario label {
-  display: block;
+  display: inline-block;
   font-size: 1rem;
   font-weight: bold;
-  padding: 0;
+  padding: 10px;
   margin-top: .75rem;
+  margin-left: 1rem;
 }
 
 .campo-formulario .radio-label {
@@ -77,5 +80,6 @@ table.paper .error {
 }
 
 .campo-formulario input:not([type="radio"]) {
-  width: 100%;
+  width: 20%;
+  display: inline-block;
 }

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block head_title %}
+{{ super() }}: cambios
+{% endblock %}
+
+
+{% block page_title %}
+Cambio de moneda
+{% endblock %}
+
+
+{% block contenido %}
+{{super()}}
+
+<!--
+  CRUD: Create, Read, Update, Delete
+  GET: read
+  POST: create, delete
+  PUT: update
+ -->
+<form action="/purchase" method="POST">
+  {{ form.csrf_token }}
+  <div>
+    {{ form.moneda_from.label }}
+    {{ form.moneda_from }}
+    {{ form.moneda_to.label }}
+    {{ form.moneda_to }}
+
+  </div>
+  <div>
+
+    {{ form.cantidad_from.label }}
+    {{ form.cantidad_from }}
+
+
+    {{ form.cantidad_to.label }}
+    {{ cantidad_to }}
+
+    {{ form.consultar_api }}
+
+  </div>
+  <div>
+    <h3>
+      {{ form.PU.label }}
+      {{ PU }}
+
+    </h3>
+  </div>
+  {{ form.comprar }}
+
+
+
+
+</form>
+
+
+{% endblock %}
