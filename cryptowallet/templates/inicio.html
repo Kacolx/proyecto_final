@@ -31,9 +31,9 @@ Listado de cambios
     </td>
     <td>{{ mov.hora }}</td>
     <td class="moneda">{{ mov.moneda_from }}</td>
-    <td class="numero">{{ mov.cantidad_from }}</td>
+    <td class="numero">{{ "{:,.4f}".format(mov.cantidad_from) }}</td>
     <td class="moneda">{{ mov.moneda_to }}</td>
-    <td class="numero">{{ mov.cantidad_to }}</td>
+    <td class="numero">{{ "{:,.4f}".format(mov.cantidad_to) }}</td>
   </tr>
   {% if mov.errores %}
   <tr>

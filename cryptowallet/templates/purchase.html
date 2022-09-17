@@ -19,16 +19,16 @@ Cambio de moneda
   POST: create, delete
   PUT: update
  -->
-<form action="/purchase" method="POST">
+<form class="paper" action="/purchase" method="POST">
   {{ form.csrf_token }}
-  <div>
+  <div class="campo-formulario">
     {{ form.moneda_from.label }}
     {{ form.moneda_from }}
     {{ form.moneda_to.label }}
     {{ form.moneda_to }}
 
   </div>
-  <div>
+  <div class="campo-formulario">
 
     {{ form.cantidad_from.label }}
     {{ form.cantidad_from }}
@@ -36,14 +36,16 @@ Cambio de moneda
 
     {{ form.cantidad_to.label }}
     {{ cantidad_to }}
-
-    {{ form.consultar_api }}
-
   </div>
-  <div>
+  {{ form.consultar_api }}
+  <div class="campo-formulario">
     <h3>
       {{ form.PU.label }}
-      {{ PU }}
+      <span>
+        {{ PU }}
+
+      </span>
+
 
     </h3>
   </div>

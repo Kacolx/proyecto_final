@@ -6,7 +6,7 @@ from datetime import date, datetime, time
 from flask import render_template, request, flash, redirect, url_for
 
 from .form import CambiosForm
-from . import app
+from . import app, MONEDAS_TO
 from .models import DBManager, CriptoModel
 
 RUTA = 'data/crypto.db'
@@ -17,6 +17,7 @@ def inicio():
     try:
         db = DBManager(RUTA)
         cambios = db.consultaSQL("SELECT * FROM crypto")
+
         return render_template("inicio.html", movs=cambios)
     except:
         flash("No se pueden cargar los movimientos", category="Error consulta")
@@ -38,8 +39,8 @@ def compra():
             moneda_to = formulario.moneda_to.data
             cantidad_from = formulario.cantidad_from.data
 
-            crip = CriptoModel(moneda_from, moneda_to)
-            crip.consultar_cambio()
+            crip = CriptoModel()
+            crip.consultar_cambio(moneda_from, moneda_to)
             calculo = crip.cambio
             cantidad_to = crip.cambio * cantidad_from
 
@@ -73,4 +74,11 @@ def compra():
 
 @app.route("/status")
 def estado():
-    return "estado de la invercion"
+    db = DBManager(RUTA)
+    crip = CriptoModel
+    consulta = db.obtenerMovimientoPorMoneda("EUR")
+
+    # for moneda in MONEDAS_TO:
+    #     dic_moneda = db.obtenerMovimientoPorMoneda(moneda)
+
+    return render_template("status.html", mov=consulta)

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block head_title %}
+{{ super() }}: cambios
+{% endblock %}
+
+
+{% block page_title %}
+Estado de inversion
+{% endblock %}
+
+
+{% block contenido %}
+{{super()}}
+
+<table class="paper">
+  <tr>
+    <th class="titulo-tabla moneda">Euros invertidos</th>
+    <th class="titulo-tabla numero">Valor actual</th>
+  </tr>
+  <tr>
+
+    <td class="numerostatus">{{ mov.cantidad_from }}</td>
+    <td class="moneda"></td>
+
+  </tr>
+
+  {% endblock %}

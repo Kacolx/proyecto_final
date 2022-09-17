@@ -26,3 +26,7 @@ class CambiosForm(FlaskForm):
     PU = FloatField("PU: ")
     comprar = SubmitField("Comprar", render_kw={
         "class": "green-button"})
+
+
+class StatusForm(FlaskForm):
+    pass

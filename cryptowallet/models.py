@@ -1,7 +1,6 @@
 import sqlite3
 import requests
-
-APIKEY = '714D8ADA-CC9C-40FE-BCCA-846022573268'
+from . import APIKEY
 
 
 class CriptoModel:
@@ -12,21 +11,23 @@ class CriptoModel:
     - consultar cambio (método)
     """
 
-    def __init__(self, moneda_from, moneda_to):
+    def __init__(self):
         """
         Construye un objeto con las monedas origen y destino
         y el cambio obtenido desde CoinAPI inicializado a cero.
         """
-        self.moneda_from = moneda_from
-        self.moneda_to = moneda_to
+        self.moneda_from = ""
+        self.moneda_to = ""
         self.cambio = 0.0
 
-    def consultar_cambio(self):
+    def consultar_cambio(self, moneda_from, moneda_to):
         """
         Consulta el cambio entre la moneda origen y la moneda destino
         utilizando la API REST CoinAPI.
         """
 
+        self.moneda_from = moneda_from
+        self.moneda_to = moneda_to
         cabeceras = {
             "X-CoinAPI-Key": APIKEY
         }
@@ -36,12 +37,12 @@ class CriptoModel:
         if respuesta.status_code == 200:
             # guardo el cambio obtenido
             self.cambio = respuesta.json()["rate"]
-        # else:
-        #     raise APIError(
-        #         "Ha ocurrido un error {} {} al consultar la API.".format(
-        #             respuesta.status_code, respuesta.reason
-        #         )
-        #     )
+        else:
+            raise ValueError(
+                "Ha ocurrido un error {} {} al consultar la API.".format(
+                    respuesta.status_code, respuesta.reason
+                )
+            )
 
 
 class DBManager:
@@ -85,4 +86,30 @@ class DBManager:
             conexion.rollback()
         conexion.close()
 
+        return resultado
+
+    def obtenerMovimientoPorMoneda(self, moneda):
+
+        consulta = "SELECT SUM(cantidad_from) FROM crypto WHERE moneda_from=?"
+        conexion = sqlite3.connect(self.ruta)
+        cursor = conexion.cursor()
+        cursor.execute(consulta, (moneda,))
+
+        datos = cursor.fetchone()
+        resultado = False
+
+        if datos:
+            nombres_columnas = []
+
+            for desc_columna in cursor.description:
+                nombres_columnas.append(desc_columna[0])
+
+            movimiento = {}
+            indice = 0
+            for nombre in nombres_columnas:
+                movimiento[nombre.strip('SUM()')] = datos[indice]
+                indice += 1
+            resultado = movimiento
+
+        conexion.close()
         return resultado
