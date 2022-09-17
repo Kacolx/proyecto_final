@@ -113,3 +113,18 @@ class DBManager:
 
         conexion.close()
         return resultado
+
+    def consultaConParametrosStatus(self, consulta, params):
+        conexion = sqlite3.connect(self.ruta)
+        cursor = conexion.cursor()
+        resultado = 0
+        try:
+            cursor.execute(consulta, params)
+            dato = cursor.fetchone()
+            resultado = dato[0]
+        except Exception as error:
+            print("ERROR DB:", error)
+            conexion.rollback()
+        conexion.close()
+
+        return resultado

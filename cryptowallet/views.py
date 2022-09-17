@@ -76,9 +76,14 @@ def compra():
 def estado():
     db = DBManager(RUTA)
     crip = CriptoModel
-    consulta = db.obtenerMovimientoPorMoneda("EUR")
+    # consulta = db.obtenerMovimientoPorMoneda("EUR")
+    consulta_from = "SELECT SUM(cantidad_from) FROM crypto WHERE moneda_from=?"
+    moneda = "EUR"
+    parametros = (moneda,)
+    consulta = db.consultaConParametrosStatus(consulta_from, params=parametros)
+    euros = consulta
 
     # for moneda in MONEDAS_TO:
     #     dic_moneda = db.obtenerMovimientoPorMoneda(moneda)
 
-    return render_template("status.html", mov=consulta)
+    return render_template("status.html", mov=euros)
