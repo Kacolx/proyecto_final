@@ -1,6 +1,6 @@
 import sqlite3
 import requests
-from . import APIKEY
+from .config import APIKEY
 
 
 class CriptoModel:

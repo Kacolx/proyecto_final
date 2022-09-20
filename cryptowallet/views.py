@@ -3,8 +3,7 @@ from flask import render_template, request, flash, redirect
 from .form import CambiosForm, StatusForm
 from . import app, MONEDAS_TO
 from .models import DBManager, CriptoModel
-
-RUTA = 'data/crypto.db'
+from . import RUTA
 
 
 @app.route("/")
