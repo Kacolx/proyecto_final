@@ -1,10 +1,5 @@
-
-
 from datetime import date, datetime, time
-
-
-from flask import render_template, request, flash, redirect, url_for
-
+from flask import render_template, request, flash, redirect
 from .form import CambiosForm, StatusForm
 from . import app, MONEDAS_TO
 from .models import DBManager, CriptoModel
@@ -16,7 +11,8 @@ RUTA = 'data/crypto.db'
 def inicio():
     try:
         db = DBManager(RUTA)
-        cambios = db.consultaSQL("SELECT * FROM crypto")
+        cambios = db.consultaSQL(
+            "SELECT * FROM crypto ORDER BY fecha DESC, hora DESC LIMIT 10")
 
         return render_template("inicio.html", movs=cambios)
     except:

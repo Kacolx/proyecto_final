@@ -73,47 +73,6 @@ class DBManager:
 
         return self.cryptocambios
 
-    def consultaConParametros(self, consulta, params):
-        conexion = sqlite3.connect(self.ruta)
-        cursor = conexion.cursor()
-        resultado = False
-        try:
-            cursor.execute(consulta, params)
-            conexion.commit()
-            resultado = True
-        except Exception as error:
-            print("ERROR DB:", error)
-            conexion.rollback()
-        conexion.close()
-
-        return resultado
-
-    def obtenerMovimientoPorMoneda(self, moneda):
-
-        consulta = "SELECT SUM(cantidad_from) FROM crypto WHERE moneda_from=?"
-        conexion = sqlite3.connect(self.ruta)
-        cursor = conexion.cursor()
-        cursor.execute(consulta, (moneda,))
-
-        datos = cursor.fetchone()
-        resultado = False
-
-        if datos:
-            nombres_columnas = []
-
-            for desc_columna in cursor.description:
-                nombres_columnas.append(desc_columna[0])
-
-            movimiento = {}
-            indice = 0
-            for nombre in nombres_columnas:
-                movimiento[nombre.strip('SUM()')] = datos[indice]
-                indice += 1
-            resultado = movimiento
-
-        conexion.close()
-        return resultado
-
     def consultaConParametrosStatus(self, consulta, params):
         conexion = sqlite3.connect(self.ruta)
         cursor = conexion.cursor()
@@ -131,3 +90,44 @@ class DBManager:
         conexion.close()
 
         return resultado
+
+    # def consultaConParametros(self, consulta, params):
+    #     conexion = sqlite3.connect(self.ruta)
+    #     cursor = conexion.cursor()
+    #     resultado = False
+    #     try:
+    #         cursor.execute(consulta, params)
+    #         conexion.commit()
+    #         resultado = True
+    #     except Exception as error:
+    #         print("ERROR DB:", error)
+    #         conexion.rollback()
+    #     conexion.close()
+
+    #     return resultado
+
+    # def obtenerMovimientoPorMoneda(self, moneda):
+
+    #     consulta = "SELECT SUM(cantidad_from) FROM crypto WHERE moneda_from=?"
+    #     conexion = sqlite3.connect(self.ruta)
+    #     cursor = conexion.cursor()
+    #     cursor.execute(consulta, (moneda,))
+
+    #     datos = cursor.fetchone()
+    #     resultado = False
+
+    #     if datos:
+    #         nombres_columnas = []
+
+    #         for desc_columna in cursor.description:
+    #             nombres_columnas.append(desc_columna[0])
+
+    #         movimiento = {}
+    #         indice = 0
+    #         for nombre in nombres_columnas:
+    #             movimiento[nombre.strip('SUM()')] = datos[indice]
+    #             indice += 1
+    #         resultado = movimiento
+
+    #     conexion.close()
+    #     return resultado

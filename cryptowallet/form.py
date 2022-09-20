@@ -1,11 +1,11 @@
 
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, HiddenField, FloatField, IntegerField, StringField, DecimalField, SelectField, DateField, TimeField
-from wtforms.validators import DataRequired, data_required
+from wtforms import SubmitField,  FloatField,  SelectField, DateField, TimeField
+from wtforms.validators import DataRequired
 
 
 class CambiosForm(FlaskForm):
-    # id = HiddenField()
+
     fecha = DateField("Fecha")
     hora = TimeField("Hora")
     moneda_from = SelectField(
