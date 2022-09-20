@@ -21,60 +21,66 @@ Cambio de moneda
  -->
 <form action="/purchase" method="POST">
   {{ form.csrf_token }}
-  <table>
+  <table class="paper">
     <tr>
+      <th>
+        {{ form.moneda_from.label }}
+      </th>
       <td>
-
+        {{ form.moneda_from }}
+      </td>
+      <th>
+        {{ form.moneda_to.label }}
+      </th>
+      <td>
+        {{ form.moneda_to }}
       </td>
     </tr>
     <tr>
+      <th>
+        {{ form.cantidad_from.label }}
+      </th>
       <td>
-
+        {{ form.cantidad_from }}
+      </td>
+      <th>
+        {{ form.cantidad_to.label }}
+      </th>
+      <td>
+        {{ cantidad_to }}
       </td>
     </tr>
     <tr>
+      <th>
+        {{ form.PU.label }}
+
+      </th>
       <td>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-
-      </td>
-    </tr>
-  </table>
-  <div class="campo-formulario">
-    {{ form.moneda_from.label }}
-    {{ form.moneda_from }}
-    {{ form.moneda_to.label }}
-    {{ form.moneda_to }}
-
-  </div>
-  <div class="campo-formulario">
-
-    {{ form.cantidad_from.label }}
-    {{ form.cantidad_from }}
-
-
-    {{ form.cantidad_to.label }}
-    {{ cantidad_to }}
-  </div>
-  {{ form.consultar_api }}
-  <div class="campo-formulario">
-    <h3>
-      {{ form.PU.label }}
-      <span>
         {{ PU }}
+      </td>
+    </tr>
+    <tr>
+      <th>
+        {{ form.consultar_api }}
 
-      </span>
-
-
-    </h3>
-  </div>
-  {{ form.comprar }}
-
-
-
+      </th>
+      <th colspan="2">
+        {{ form.comprar }}
+      </th>
+    </tr>
+    <!-- {% if mov.errores %}
+    <tr>
+      <td colspan="4" class="error">
+        {% for error in form.errores %}
+        {{ error }}.
+        {% endfor %}
+      </td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+    {% else %}
+    <tr> -->
+  </table>
 
 </form>
 

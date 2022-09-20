@@ -91,20 +91,20 @@ class DBManager:
 
         return resultado
 
-    # def consultaConParametros(self, consulta, params):
-    #     conexion = sqlite3.connect(self.ruta)
-    #     cursor = conexion.cursor()
-    #     resultado = False
-    #     try:
-    #         cursor.execute(consulta, params)
-    #         conexion.commit()
-    #         resultado = True
-    #     except Exception as error:
-    #         print("ERROR DB:", error)
-    #         conexion.rollback()
-    #     conexion.close()
+    def consultaConParametros(self, consulta, params):
+        conexion = sqlite3.connect(self.ruta)
+        cursor = conexion.cursor()
+        resultado = False
+        try:
+            cursor.execute(consulta, params)
+            conexion.commit()
+            resultado = True
+        except Exception as error:
+            print("ERROR DB:", error)
+            conexion.rollback()
+        conexion.close()
 
-    #     return resultado
+        return resultado
 
     # def obtenerMovimientoPorMoneda(self, moneda):
 
