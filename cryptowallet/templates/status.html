@@ -12,25 +12,30 @@ Estado de inversion
 
 {% block contenido %}
 {{super()}}
-<div>
 
-  <form action="/status" method="post">
-    {{ form.csrf_token }}
-    <div>
 
-      <table class="paper">
-        <tr>
-          <th class="titulo-tabla moneda">Euros invertidos</th>
-          <th class="titulo-tabla numero">Valor actual</th>
-        </tr>
-        <tr>
+<form action="/status" method="post">
+  {{ form.csrf_token }}
 
-          <td class="numerostatus">{{ "{:,.4f}".format(mov) }}</td>
-          <td class="moneda">{{ "{:,.4f}".format(cantidad) }}</td>
-    </div>
-    <br>
-    {{ form.consultar }}
-  </form>
-</div>
+
+  <table class="paper">
+    <tr>
+      <th class="titulo-tabla moneda">Euros invertidos</th>
+      <th class="titulo-tabla numero">Valor actual</th>
+    </tr>
+    <tr>
+
+      <td class="numerostatus">{{ "{:,.4f}".format(mov) }}</td>
+      <td class="moneda">{{ "{:,.4f}".format(cantidad) }}</td>
+    </tr>
+    <tr>
+      {{ form.consultar }}
+
+    </tr>
+  </table>
+
+
+</form>
+
 </tr>
 {% endblock %}

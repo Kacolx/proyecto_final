@@ -15,7 +15,7 @@ class CambiosForm(FlaskForm):
         "To: ",  choices=[("BTC", "BTC"), ("ETH", "ETH"), ("BNB", "BNB")],
         validators=[DataRequired(message="selecciona una moneda")],)
     cantidad_from = FloatField(
-        "Q from", validators=[DataRequired(message="escribe la cantidad")], )
+        "Q from", validators=[DataRequired(message="escribe la cantidad")])
 
     cantidad_to = FloatField(
         "Q",
@@ -26,6 +26,7 @@ class CambiosForm(FlaskForm):
     PU = FloatField("PU: ")
     comprar = SubmitField("Comprar", render_kw={
         "class": "green-button"})
+    limpiar = SubmitField("Borrar")
 
 
 class StatusForm(FlaskForm):
